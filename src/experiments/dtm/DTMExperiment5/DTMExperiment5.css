@@ -1,0 +1,597 @@
+/*---‐------‐---------DTMExperiment4.css--‐-------‐------------------------------------------------------------- */
+
+/* Color tokens — matches LabSim warm palette */
+:root {
+  --orange: #e07b2a;
+  --orange-light: #f5a623;
+  --green: #2db34a;
+  --green-dark: #1e8e3e;
+  --red: #e53935;
+  --blue-header: #2c3e7a;
+  --blue-mux: #3a5fbf;
+  --blue-row: #2c4fa0;
+  --bg: #f7f8fc;
+  --card-bg: #ffffff;
+  --border: #dde1ea;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --pending-color: #9ca3af;
+  --wire-default: #333;
+  --wire-active: #2db34a;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Reset / Base ────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Root container ──────────────────────────────────────────────────────────── */
+.dtm04-root {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────────── */
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.exp-title {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.btn-back,
+.btn-help {
+  background: var(--blue-header);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.btn-back:hover,
+.btn-help:hover {
+  opacity: 0.85;
+}
+.dtm-help-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgb(15 23 42 / 55%); }
+.dtm-help-dialog { width: min(100%, 480px); max-height: 80vh; overflow-y: auto; padding: 22px; border: 1px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); box-shadow: 0 16px 44px rgb(15 23 42 / 24%); }
+.dtm-help-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.dtm-help-header h2 { margin: 0; font-size: 18px; }
+.dtm-help-close { border: 0; background: transparent; color: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+.dtm-help-items { display: grid; gap: 10px; padding-left: 20px; margin: 14px 0 20px; }
+.dtm-help-items li { font-size: 13px; line-height: 1.55; }
+.dtm-help-done { display: block; margin-left: auto; padding: 9px 16px; border: 0; border-radius: 6px; background: var(--blue-header); color: #fff; font-weight: 600; cursor: pointer; }
+
+/* ── Cards ───────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+
+/* ── Section headings ────────────────────────────────────────────────────────── */
+.section-heading {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.section-heading.orange,
+.panel-heading.orange {
+  color: var(--orange);
+}
+
+.panel-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+/* ── Collapsible ─────────────────────────────────────────────────────────────── */
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chevron {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.collapsible-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.proc-grid {
+  flex-direction: row;
+  gap: 40px;
+}
+
+.proc-col {
+  list-style: decimal;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.proc-col li {
+  font-size: 13px;
+}
+
+/* ── Simulation Row ──────────────────────────────────────────────────────────── */
+.sim-row {
+  display: grid;
+  grid-template-columns: 20% 58% 22%;
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* ── Inputs Panel ────────────────────────────────────────────────────────────── */
+.inputs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  
+}
+
+/* ── Toggle Switch ───────────────────────────────────────────────────────────── */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.toggle-label {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 70px;
+}
+
+.toggle-val {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 14px;
+  text-align: right;
+}
+
+.toggle-switch {
+  width: 44px;
+  height: 22px;
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle-switch.on {
+  background: var(--green);
+}
+
+.toggle-switch.off {
+  background: #cbd5e1;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: left 0.2s;
+}
+
+.toggle-switch.on .toggle-thumb {
+  left: 25px;
+}
+
+.toggle-switch.off .toggle-thumb {
+  left: 3px;
+}
+
+.input-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: #f0f4ff;
+}
+
+/* ── Canvas Panel ────────────────────────────────────────────────────────────── */
+.canvas-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  height: 480px;
+  max-width: auto;
+  min-width: 0;
+}
+
+.canvas-area {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.mux-svg {
+  width: 100%;
+  max-width: 500px;
+  max-height: 400px;
+  display: block;
+}
+
+/* ── SVG elements ────────────────────────────────────────────────────────────── */
+.wire {
+  stroke: var(--wire-default);
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 0.3s;
+}
+
+.active-wire {
+  stroke: var(--wire-active) !important;
+  stroke-width: 2.5px;
+}
+
+.wire-node {
+  fill: var(--wire-default);
+  transition: fill 0.3s;
+}
+
+.active-node {
+  fill: var(--wire-active) !important;
+}
+
+.mux-block {
+  fill: var(--blue-mux);
+  stroke: #2a47a8;
+  stroke-width: 1.5;
+}
+
+.mux-label-top {
+  font-size: 22px;
+  font-weight: 700;
+  fill: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.mux-label-bot {
+  font-size: 22px;
+  font-weight: 700;
+  fill: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.svg-label {
+  font-size: 11px;
+  fill: var(--text-muted);
+  font-family: "Inter", sans-serif;
+}
+
+.svg-val {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--text);
+  font-family: "Inter", sans-serif;
+}
+
+/* ── LED ─────────────────────────────────────────────────────────────────────── */
+.led-circle {
+  transition: fill 0.3s, filter 0.3s;
+}
+
+.led-off {
+  fill: #8b0000;
+  filter: none;
+}
+
+.led-on {
+  fill: var(--red);
+  filter: drop-shadow(0 0 8px rgba(229, 57, 53, 0.8)) drop-shadow(0 0 16px rgba(229, 57, 53, 0.4));
+}
+
+/* ── Canvas Buttons ──────────────────────────────────────────────────────────── */
+.canvas-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-verify,
+.btn-reset {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-verify {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-reset {
+  background: var(--red);
+  color: #fff;
+}
+
+.btn-verify:hover,
+.btn-reset:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btn-verify:active,
+.btn-reset:active {
+  transform: translateY(0);
+}
+
+/* ── Analysis Panel ──────────────────────────────────────────────────────────── */
+.analysis-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.analysis-block {
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.analysis-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue-header);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.analysis-table td {
+  padding: 2px 4px;
+}
+
+.analysis-table td:first-child {
+  font-weight: 500;
+  width: 80px;
+}
+
+.analysis-table td:nth-child(2) {
+  width: 14px;
+  color: var(--text-muted);
+}
+
+.analysis-table td:last-child {
+  font-weight: 700;
+}
+
+.conclusion-text {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.verified-badge {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* ── Observation Table ───────────────────────────────────────────────────────── */
+.table-section {
+  overflow: hidden;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.obs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 700px;
+}
+
+.obs-table thead tr {
+  background: var(--blue-row);
+  color: #fff;
+}
+
+.obs-table thead th {
+  padding: 10px 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.obs-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.obs-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.obs-table tbody td {
+  padding: 9px 8px;
+  text-align: center;
+}
+
+.obs-table tbody tr:hover {
+  background: #f0f4ff;
+}
+
+.row-verified {
+  background: #f0fdf4;
+}
+
+.row-verified:hover {
+  background: #dcfce7 !important;
+}
+
+.row-divider {
+  border-bottom: 2px dashed #9ca3af !important;
+}
+
+.status-verified {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.status-pending {
+  color: var(--pending-color);
+  font-size: 12px;
+}
+
+.table-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: #fef9f0;
+  border: 1px solid #f5d9a0;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+/* ── Submit Section ──────────────────────────────────────────────────────────── */
+.submit-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.btn-submit {
+  padding: 14px 48px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+
+.btn-submit.enabled {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-submit.disabled {
+  background: #9ca3af;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.btn-submit.enabled:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.submit-status {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.7;
+}
+
+.submit-success {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .sim-row {
+    grid-template-columns: 1fr;
+  }
+
+  .proc-grid {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-title {
+    font-size: 14px;
+  }
+}

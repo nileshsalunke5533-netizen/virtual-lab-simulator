@@ -1,0 +1,117 @@
+/* =====================================
+   MENU
+===================================== */
+
+.menu {
+    width: 100%;
+    background: #ffffff;
+    padding: 70px 15px;
+}
+
+
+/* =====================================
+   MENU ITEM
+===================================== */
+
+.menu-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 4px;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #334155;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =====================================
+   ICON
+===================================== */
+
+.menu-item svg {
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+
+    color: #475569;
+
+    stroke-width: 2;
+}
+
+
+/* =====================================
+   HOVER
+===================================== */
+
+.menu-item:hover {
+    background: #f1f5f9;
+
+    color: #0f172a;
+}
+
+.menu-item:hover svg {
+    color: #2563eb;
+}
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+.menu-item.logout {
+    color: #dc2626;
+
+    margin-top: 8px;
+}
+
+.menu-item.logout svg {
+    color: #dc2626;
+}
+
+.menu-item.logout:hover {
+    background: #fef2f2;
+
+    color: #b91c1c;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 768px) {
+
+    .menu {
+        padding: 8px 5px;
+    }
+
+    .menu-item {
+        padding: 12px;
+
+        font-size: 15px;
+
+        gap: 13px;
+    }
+
+    .menu-item svg {
+        width: 21px;
+        height: 21px;
+    }
+}

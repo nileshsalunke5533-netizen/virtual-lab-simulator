@@ -1,0 +1,1101 @@
+/* =====================================================
+   STUDENT MANAGEMENT  (standalone page)
+   Every class is prefixed "sm-", so nothing here can
+   affect another page. No other stylesheet is needed.
+   Look matches FacultyDashboard: rounded blue header,
+   white cards on a light blue page.
+===================================================== */
+
+
+/* =====================================
+   PAGE CONTAINER + SHARED COLOURS
+===================================== */
+
+.sm-container {
+  --blue: #1565c0;
+  --blue-dark: #0d47a1;
+  --blue-soft: #eef5ff;
+  --green: #22c55e;
+  --text: #1e293b;
+  --muted: #64748b;
+  --line: #e2e8f0;
+
+  /* One width + one side gutter shared by the header, the menu and the
+     page content, so they always line up and scale together. */
+  --sm-max: 1280px;
+  --sm-gutter: 30px;
+
+  position: relative;            /* menu is positioned against this box */
+  display: flow-root;            /* header margin stays inside the page colour */
+  min-height: 100vh;
+  background: #f4f7fc;
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.sm-container *,
+.sm-container *::before,
+.sm-container *::after {
+  box-sizing: border-box;
+}
+
+/* :where() keeps these resets weaker than the class rules below */
+:where(.sm-container) button,
+:where(.sm-container) input,
+:where(.sm-container) select {
+  font: inherit;
+}
+
+:where(.sm-container) button {
+  cursor: pointer;
+}
+
+/* One clear keyboard focus style for everything */
+.sm-container :focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.sm-header {
+  position: relative;
+  z-index: 900;
+  height: 75px;
+  width: calc(100% - (var(--sm-gutter) * 2));
+  max-width: var(--sm-max);       /* same cap as .sm-page */
+  margin: 30px auto 0;            /* same centring as .sm-page */
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.sm-menu-toggle {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.sm-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sm-brand {
+  margin: 0 0 0 15px;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.sm-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sm-user-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.sm-user-text strong {
+  font-size: 15px;
+}
+
+.sm-user-text small {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.sm-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+
+/* =====================================
+   FLOATING MENU
+===================================== */
+
+.sm-menu {
+  position: absolute;
+  top: 105px;
+  left: max(var(--sm-gutter), calc((100% - var(--sm-max)) / 2));
+  z-index: 1000;
+  width: 290px;
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  animation: smMenuOpen 0.2s ease;
+}
+
+@keyframes smMenuOpen {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sm-menu-item {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sm-menu-item:hover {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.sm-menu-item.active,
+.sm-menu-item.active:hover {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.sm-menu-item.logout:hover {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+.sm-menu-icon {
+  width: 24px;
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-menu-icon svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #475569;
+  stroke-width: 2;
+}
+
+.sm-menu-item:hover .sm-menu-icon svg {
+  color: #2563eb;
+}
+
+.sm-menu-item.active .sm-menu-icon svg,
+.sm-menu-item.active:hover .sm-menu-icon svg {
+  color: #ffffff;
+}
+
+.sm-menu-divider {
+  height: 1px;
+  margin: 6px 8px;
+  background: var(--line);
+}
+
+
+/* =====================================
+   CONTENT + PAGE WRAPPER (stable width)
+   The wrapper always fills the available width up to a cap,
+   and every child may shrink instead of pushing the layout wider.
+===================================== */
+
+.sm-content {
+  padding: 30px var(--sm-gutter);
+}
+
+.sm-page {
+  width: 100%;
+  max-width: 1280px;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.sm-page > *,
+.sm-page section,
+.sm-page form {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sm-page-head {
+  margin-bottom: 22px;
+}
+
+.sm-page-head h2 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  color: #222;
+}
+
+.sm-page-head p {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.sm-summary {
+  margin-bottom: 22px;
+}
+
+.sm-table-gap {
+  margin-top: 14px;
+}
+
+
+/* =====================================
+   CARDS, NOTES, ALERTS, GRIDS
+===================================== */
+
+.sm-card {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 26px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.sm-card h3 {
+  margin: 0 0 8px;
+  color: #222;
+  font-size: 21px;
+}
+
+.sm-card-sub {
+  margin: 0 0 18px;
+  color: #666;
+  font-size: 14px;
+}
+
+.sm-note {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-size: 14px;
+}
+
+.sm-alert {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border: 1px solid #f2b8b5;
+  border-radius: 10px;
+  background: #fdecea;
+  color: #b3261e;
+  font-size: 14px;
+}
+
+.sm-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.sm-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sm-grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+/* =====================================
+   SUMMARY STAT CARDS
+===================================== */
+
+.sm-stat {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.sm-stat-icon {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.sm-stat-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sm-stat-label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sm-stat-value {
+  color: var(--blue);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+
+/* =====================================
+   TOOLBAR + FORM CONTROLS
+===================================== */
+
+.sm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sm-input,
+.sm-select {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sm-input--grow {
+  flex: 1 1 260px;
+}
+
+.sm-input:hover,
+.sm-select:hover {
+  border-color: var(--blue);
+}
+
+.sm-input:focus,
+.sm-select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.15);
+}
+
+.sm-select option {
+  color: var(--text);
+  background: #ffffff;
+}
+
+.sm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px 24px;
+}
+
+.sm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sm-field .sm-input,
+.sm-field .sm-select {
+  width: 100%;
+}
+
+.sm-field small {
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 400;
+}
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.sm-btn {
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.sm-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.sm-btn--primary {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.sm-btn--primary:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+.sm-btn--outline {
+  background: #ffffff;
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.sm-btn--outline:hover:not(:disabled) {
+  background: var(--blue-soft);
+}
+
+.sm-btn--ghost {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.sm-btn--ghost:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.sm-btn--danger {
+  background: #ffffff;
+  border-color: #e0a29d;
+  color: #b3261e;
+}
+
+.sm-btn--danger:hover:not(:disabled) {
+  background: #fdecea;
+}
+
+.sm-btn--danger-solid {
+  background: #c62828;
+  color: #ffffff;
+}
+
+.sm-btn--danger-solid:hover:not(:disabled) {
+  background: #b71c1c;
+}
+
+.sm-btn--success {
+  background: #ffffff;
+  border-color: #86d3a3;
+  color: #15803d;
+}
+
+.sm-btn--success:hover:not(:disabled) {
+  background: #e8f7ee;
+}
+
+
+/* =====================================
+   TABLES
+===================================== */
+
+.sm-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.sm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sm-table th {
+  padding: 12px 14px;
+  background: #eef3fa;
+  color: var(--text);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sm-table td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.sm-table tbody tr:hover {
+  background: #f4f7fc;
+}
+
+.sm-strong {
+  font-weight: 600;
+}
+
+.sm-muted-row {
+  opacity: 0.7;
+}
+
+.sm-empty {
+  padding: 28px !important;
+  color: var(--muted);
+  text-align: center;
+}
+
+.sm-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
+/* =====================================
+   BADGES
+===================================== */
+
+.sm-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sm-badge--active,
+.sm-badge--completed {
+  background: #e8f7ee;
+  color: #15803d;
+}
+
+.sm-badge--in-progress {
+  background: #fff4dc;
+  color: #b45309;
+}
+
+.sm-badge--inactive,
+.sm-badge--disabled {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+
+/* =====================================
+   PROGRESS BAR
+===================================== */
+
+.sm-progress {
+  width: 100%;
+  height: 12px;
+  background: var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.sm-progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+
+/* =====================================
+   PAGINATION
+===================================== */
+
+.sm-pagination {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.sm-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* =====================================
+   TOP BAR (back link left, heading right)
+===================================== */
+
+.sm-topbar {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.sm-topbar-title {
+  margin: 0;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.sm-back {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sm-back:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================
+   PROFILE
+===================================== */
+
+.sm-profile-head {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sm-profile-head h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.sm-info {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px 24px;
+}
+
+.sm-info div {
+  min-width: 0;
+  padding: 12px 14px;
+  background: #f4f7fc;
+  border-radius: 10px;
+}
+
+.sm-info dt {
+  margin-bottom: 4px;
+  color: #546e7a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sm-info dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   SUBJECT PROGRESS CARDS
+===================================== */
+
+.sm-progress-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.sm-progress-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.sm-progress-top strong {
+  color: var(--blue);
+  font-size: 16px;
+}
+
+.sm-progress-top span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sm-progress-name {
+  min-height: 36px;
+  margin: 4px 0 10px;
+  color: #546e7a;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sm-progress-count {
+  margin: 10px 0 2px;
+  color: #37474f;
+  font-size: 14px;
+}
+
+.sm-progress-count b {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.sm-progress-meta {
+  margin: 0;
+  color: #b26a00;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =====================================
+   ATTEMPTED TABLE
+===================================== */
+
+.sm-exp-cell {
+  min-width: 220px;
+  max-width: 420px;
+  overflow-wrap: anywhere;
+}
+
+.sm-expand {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sm-expand:hover {
+  text-decoration: underline;
+}
+
+.sm-attempt-row td {
+  background: #f8fafc;
+  font-size: 13px;
+}
+
+.sm-attempt-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  color: #37474f;
+}
+
+
+/* =====================================
+   NOT ATTEMPTED (compact, grouped by subject)
+===================================== */
+
+.sm-pending-groups {
+  display: grid;
+  gap: 8px;
+}
+
+.sm-pending-group {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.sm-pending-group summary {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sm-pending-count {
+  margin-left: auto;
+  color: #b26a00;
+  font-size: 13px;
+}
+
+.sm-pending-list {
+  margin: 0;
+  padding: 0 14px 14px;
+  max-height: 280px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px 16px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.sm-pending-list li {
+  min-width: 0;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #37474f;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.sm-pending-code {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =====================================
+   CONFIRMATION MODAL
+===================================== */
+
+.sm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 30, 70, 0.55);
+}
+
+.sm-modal {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 48px);
+  padding: 24px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.sm-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sm-modal-head h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.sm-modal-close {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.sm-modal-close:hover {
+  background: var(--blue-soft);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.sm-modal-actions {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 1000px) {
+
+  .sm-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 768px) {
+
+  .sm-container {
+    --sm-gutter: 15px;
+  }
+
+  .sm-header {
+    height: 70px;
+    margin-top: 15px;
+    padding: 0 15px;
+  }
+
+  .sm-brand {
+    margin-left: 8px;
+    font-size: 21px;
+  }
+
+  .sm-user-text {
+    display: none;
+  }
+
+  .sm-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .sm-menu {
+    top: 95px;
+    width: calc(100% - 30px);
+    max-width: 320px;
+  }
+
+  .sm-content {
+    padding: 15px var(--sm-gutter);
+  }
+
+  .sm-page-head h2 {
+    font-size: 25px;
+  }
+
+  .sm-card {
+    padding: 20px;
+  }
+
+  .sm-grid--3,
+  .sm-grid--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =====================================
+   SMALL SCREENS
+===================================== */
+
+@media (max-width: 640px) {
+
+  .sm-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sm-topbar-title {
+    text-align: left;
+  }
+
+  .sm-pending-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .sm-container {
+    --sm-gutter: 12px;
+  }
+
+  .sm-header {
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+
+  .sm-menu-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .sm-brand {
+    font-size: 19px;
+  }
+
+  .sm-menu {
+    top: 87px;
+    width: calc(100% - 24px);
+    max-width: none;
+  }
+
+  .sm-content {
+    padding: 12px var(--sm-gutter);
+  }
+
+  .sm-card {
+    padding: 17px;
+  }
+}
+
+
+/* Respect the "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+
+  .sm-container *,
+  .sm-container *::before,
+  .sm-container *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

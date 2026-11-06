@@ -1,0 +1,651 @@
+/* ==========================================================================
+DCNExperiment5.css
+========================================================================== */
+:root {
+  --orange: #e07b2a;
+  --orange-light: #f5a623;
+  --green: #2db34a;
+  --green-dark: #1e8e3e;
+  --red: #e53935;
+  --blue-header: #2c3e7a;
+  --blue-mux: #3a5fbf;
+  --blue-row: #2c4fa0;
+  --bg: #f7f8fc;
+  --card-bg: #ffffff;
+  --border: #dde1ea;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --pending-color: #9ca3af;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.lab-container {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg);
+}
+/* ── Header ───────────────────────────────────────────────────────────── */
+.lab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--blue-header);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+.lab-header .exp-title {
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  flex: 1;
+  padding: 0 15px;
+}
+
+.btn-back,
+.btn-help {
+  background-color: #1f2a47;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+.dcn-help-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgb(15 23 42 / 55%); }
+.dcn-help-dialog { width: min(100%, 480px); max-height: 80vh; overflow-y: auto; padding: 22px; border: 1px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); box-shadow: 0 16px 44px rgb(15 23 42 / 24%); }
+.dcn-help-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.dcn-help-header h2 { margin: 0; font-size: 18px; }
+.dcn-help-close { border: 0; background: transparent; color: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+.dcn-help-items { display: grid; gap: 10px; padding-left: 20px; margin: 14px 0 20px; }
+.dcn-help-items li { font-size: 13px; line-height: 1.55; }
+.dcn-help-done { display: block; margin-left: auto; padding: 9px 16px; border: 0; border-radius: 6px; background: #1f2a47; color: #fff; font-weight: 600; cursor: pointer; }
+
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.panel-heading {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.panel-heading.orange { color: var(--orange); }
+
+.panel-subheading {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue-header);
+  margin: 0 0 14px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 6px;
+}
+
+.panel-text { font-size: 13px; line-height: 1.6; }
+
+/* ── Collapsible ──────────────────────────────────────────────────────── */
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.collapsible-content {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.collapsible-content ul, .collapsible-content ol { padding-left: 20px; }
+
+/* ── Simulation grid ──────────────────────────────────────────────────── */
+.sim-row {
+  display: grid;
+  grid-template-columns: 260px 1fr 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.sim-sidebar, .sim-analyzer-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 20px;
+  align-self: start;
+}
+
+/* ── Radio group ──────────────────────────────────────────────────────── */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.selected-badge {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.badge-title { font-size: 10px; font-weight: 700; color: #1d4ed8; }
+.badge-value { font-size: 14px; font-weight: 700; color: var(--blue-header); }
+
+/* ── Components tray ──────────────────────────────────────────────────── */
+.component-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.component-tray-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+
+.component-tray-item.draggable { cursor: grab; background: #fff7ed; border-color: #fdba74; }
+.component-tray-item.draggable:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.component-tray-item.used { opacity: 0.45; background: #f3f4f6; }
+.component-tray-item.active { background: #ecfdf5; border-color: #a7f3d0; }
+.component-tray-item.disabled { opacity: 0.5; background: #f3f4f6; }
+
+.tray-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.tray-img-fallback {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #e5e7eb;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+
+.tray-item-label { font-size: 12px; font-weight: 600; color: var(--text); }
+
+.tray-instruction {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ── Status banner ────────────────────────────────────────────────────── */
+.status-banner {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.banner-ready { background: #e0f2fe; color: #0369a1; border-left: 4px solid #0284c7; }
+.banner-locked { background: #fef3c7; color: #92400e; border-left: 4px solid #d97706; }
+
+/* ── Reference guide box ──────────────────────────────────────────────── */
+.reference-guide-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 18px;
+}
+.guide-title { font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 10px; }
+.guide-sequence-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+.guide-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 4px 2px;
+}
+.guide-index { font-size: 10px; font-weight: 700; color: #64748b; }
+.guide-color { width: 100%; height: 8px; border-radius: 2px; margin: 4px 0; }
+.guide-name {
+  font-size: 9px;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── Canvas stage (RJ45 connector drop zone + pin overlay) ───────────────── */
+.rj45-canvas-stage {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  background: #f9fafb;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  overflow: hidden;
+  padding: 24px 0;
+}
+
+.drop-instruction-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 30px;
+}
+.drop-instruction-banner .drop-icon {
+  font-size: 26px;
+  color: var(--orange);
+  animation: bounce-down 1.1s ease-in-out infinite;
+}
+.drop-instruction-banner p { font-size: 14px; font-weight: 600; }
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.connector-image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 530 / 590;
+  margin: 0 auto;
+}
+
+.connector-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.connector-img-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ── Pin slot overlay ──────────────────────────────────────────────────── */
+/* Anchored by bottom-center (transform) to the TOP of each measured pin, so
+   the slot appears to plug into the pin from above. Sized narrow to match
+   the real ~8% pin pitch on the connector photo. */
+.pin-slot-overlay {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: default;
+}
+
+.pin-slot-overlay.pin-testing-highlight .inserted-wire-mini,
+.pin-slot-overlay.pin-testing-highlight .empty-slot-dot {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.6);
+}
+
+.pin-index-tag {
+  font-size: 8px;
+  font-weight: 800;
+  color: #475569;
+  background: #ffffffcc;
+  border-radius: 2px;
+  padding: 0 2px;
+  line-height: 1.3;
+}
+
+.empty-slot-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px dashed #9ca3af;
+  background: #fff;
+}
+
+.inserted-wire-mini {
+  position: relative;
+  width: 14px;
+  height: 24px;
+  border-radius: 2px;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.inserted-wire-mini.removable { cursor: pointer; }
+.inserted-wire-mini.removable:hover { outline: 2px solid var(--red); outline-offset: 1px; }
+
+.wire-stripe-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 5px, #fff 5px, #fff 10px);
+  opacity: 0.35;
+  border-radius: 4px;
+}
+
+/* ── Crimping tool animated overlay ──────────────────────────────────────── */
+.crimp-tool-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 210px;
+  aspect-ratio: 876 / 444;
+  transform: translate(-50%, -190%);
+  z-index: 5;
+  pointer-events: none;
+}
+.crimp-tool-overlay img { width: 100%; height: 100%; object-fit: contain; display: block; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25)); }
+
+.crimp-tool-animate { animation: crimp-descend 0.9s ease-in-out; }
+
+@keyframes crimp-descend {
+  0% { transform: translate(-50%, -190%); }
+  45% { transform: translate(-50%, -55%); }
+  60% { transform: translate(-50%, -60%); }
+  100% { transform: translate(-50%, -190%); }
+}
+
+/* ── Wire tray ────────────────────────────────────────────────────────── */
+.wire-tray-section {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 18px;
+}
+.tray-heading { margin: 0 0 12px; font-size: 13px; font-weight: 700; color: #475569; }
+.wire-grid-mesh { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+.draggable-wire-card {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  transition: transform 0.15s;
+}
+.draggable-wire-card:hover { transform: translateY(-2px); }
+
+.wire-color-preview-bar {
+  width: 24px; height: 24px;
+  border-radius: 4px;
+  position: relative;
+  flex-shrink: 0;
+}
+.wire-text-name { font-size: 11px; font-weight: 600; color: #334155; }
+
+/* ── Action buttons ───────────────────────────────────────────────────── */
+.workspace-actions-row {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+.btn-action {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+.crimp-btn.ready { background: #4f46e5; color: #fff; }
+.test-btn.ready { background: var(--green); color: #fff; }
+.reset-btn { background: #64748b; color: #fff; }
+.btn-action.disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+
+/* ── LAN tester panel (light theme, matches LabSim card language) ───────── */
+.lan-hardware-simulator-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.tester-hardware-title {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--blue-header);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tester-reference-image {
+  display: block;
+  width: 100%;
+  max-width: 190px;
+  aspect-ratio: 506 / 544;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+}
+.tester-img-fallback,
+.tester-reference-fallback {
+  width: 100%;
+  max-width: 190px;
+  aspect-ratio: 506 / 544;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto 18px;
+  padding: 8px;
+}
+
+.tester-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 15px; }
+.tester-unit-box { background: #f4f6fb; border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.unit-header-label { font-size: 11px; font-weight: 800; color: var(--blue-header); margin-bottom: 10px; text-align: center; letter-spacing: 0.03em; }
+
+.led-matrix-row { display: flex; justify-content: space-between; background: #eef1f7; padding: 10px; border-radius: 6px; }
+.led-node { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.led-lbl { font-size: 10px; font-weight: 700; color: var(--text-muted); }
+.led-bulb { width: 12px; height: 12px; border-radius: 50%; background: #cbd5e1; transition: all 0.15s ease; }
+.led-on .led-bulb { background: var(--red); box-shadow: 0 0 8px rgba(229, 57, 53, 0.6); }
+.led-on-remote .led-bulb { background: var(--green); box-shadow: 0 0 8px rgba(45, 179, 74, 0.6); }
+.led-pulsing .led-bulb { animation: pulse-glow 0.4s infinite alternate; }
+@keyframes pulse-glow {
+  from { background: #cbd5e1; box-shadow: none; }
+  to { background: var(--orange-light); box-shadow: 0 0 10px rgba(245, 166, 35, 0.7); }
+}
+
+.diagnostic-console-log { background: #f8fafc; border-radius: 6px; padding: 12px; border: 1px solid var(--border); }
+.diagnostic-console-log h5 { margin: 0 0 10px; font-size: 11px; font-weight: 800; color: var(--blue-header); text-transform: uppercase; letter-spacing: 0.03em; }
+.console-scroll-box { max-height: 120px; overflow-y: auto; font-size: 12px; display: flex; flex-direction: column; gap: 5px; }
+.console-line { color: var(--text-muted); }
+.line-pass { color: var(--green-dark); font-weight: 600; }
+.line-fail { color: var(--red); font-weight: 600; }
+.pulsing-line { color: var(--orange); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.5; } }
+.final-verdict-summary { margin-top: 8px; font-weight: 700; border-top: 1px dashed var(--border); padding-top: 8px; }
+.pass-text { color: var(--green-dark); }
+.fail-text { color: var(--red); }
+
+/* ── Analysis panel ───────────────────────────────────────────────────── */
+.analysis-panel { display: flex; flex-direction: column; gap: 16px; }
+.analysis-block { background: #f4f6fb; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.block-sub-title { font-size: 11px; font-weight: 800; color: #6b7280; margin: 0 0 10px; letter-spacing: 0.02em; }
+.metric-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+.metric-row strong { color: var(--text-muted); font-weight: 500; }
+.metric-row span { font-weight: 600; }
+.border-top-dash { border-top: 1px dashed #e5e7eb; padding-top: 14px; }
+.status-pill { padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.status-pill.waiting { background: #f3f4f6; color: #6b7280; }
+.status-pill.pass { background: #d1fae5; color: #065f46; }
+.status-pill.fail { background: #fee2e2; color: #991b1b; }
+.summary-conclusion-block { background: #f8fafc; border-radius: 6px; padding: 12px; border: 1px solid #e2e8f0; }
+.conclusion-feedback-text { font-size: 12px; line-height: 1.5; color: var(--text-muted); margin: 0; }
+
+/* ── Observation table ─────────────────────────────────────────────────── */
+.table-section { display: flex; flex-direction: column; }
+.table-scroll { width: 100%; overflow-x: auto; }
+.obs-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; min-width: 700px; }
+.obs-table th, .obs-table td { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: center; }
+.obs-table th { background: var(--blue-row); color: #fff; font-weight: 600; font-size: 12px; }
+.row-verified { background: #f0fdf4; }
+.result-tag-cell { font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.cell-pass { color: var(--green); background: #ecfdf5; }
+.cell-fail { color: var(--red); background: #fef2f2; }
+.status-verified { color: var(--green-dark); font-weight: 600; }
+.status-pending { color: var(--pending-color); font-size: 12px; }
+.table-hint { margin: 12px 0 0; font-size: 12px; color: var(--text-muted); background: #fef9f0; border: 1px solid #f5d9a0; border-radius: 6px; padding: 8px 12px; }
+
+/* ── Submit ───────────────────────────────────────────────────────────── */
+.submit-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.btn-submit { padding: 12px 36px; font-size: 14px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; }
+.btn-submit.enabled { background: var(--green); color: #fff; }
+.btn-submit.disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+.submit-status { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+.submit-success { color: var(--green-dark); font-weight: 700; }
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .sim-row { grid-template-columns: 1fr; }
+  .sim-sidebar, .sim-analyzer-sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; position: static; }
+}
+@media (max-width: 768px) {
+  .sim-sidebar, .sim-analyzer-sidebar { grid-template-columns: 1fr; }
+  .guide-sequence-row { grid-template-columns: repeat(4, 1fr); }
+  .wire-grid-mesh { grid-template-columns: 1fr 1fr; }
+  .tester-split-grid { grid-template-columns: 1fr; }
+}
+/* Force Back and Help button colors */
+.lab-header button.btn-back,
+.lab-header button.btn-help {
+  background: #2563eb !important;
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  border: 1px solid #2563eb !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lab-header button.btn-back:hover,
+.lab-header button.btn-help:hover {
+  background: #1d4ed8 !important;
+  color: #ffffff !important;
+}
+
+/* Keep title color separate from buttons */
+.lab-header .exp-title {
+  background: #ffffff !important;
+  color: #1e3a8a !important;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin: 0 15px;
+}
+
+/* Back and Help buttons blue hi rahenge */
+.lab-header button.btn-back,
+.lab-header button.btn-help {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+/* Remove header background */
+.lab-header {
+  background: transparent !important;
+  color: inherit;
+  box-shadow: none !important;
+}
+
+/* Remove title background */
+.lab-header .exp-title {
+  background: transparent !important;
+  color: #1e3a8a !important;
+  padding: 12px 15px;
+  margin: 0 15px;
+  box-shadow: none !important;
+}
+
+
+
+.lab-header button.btn-back:hover,
+.lab-header button.btn-help:hover {
+  background: #2b438a !important;
+}
+

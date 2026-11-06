@@ -1,0 +1,758 @@
+/* =====================================================
+   RESULTS & PROGRESS  (standalone page)
+   Every class is prefixed "rp-", so nothing here can
+   affect another page. No other stylesheet is needed.
+   Theme from the LabSim auth pages: Arial, #f4f7fc page,
+   white cards (16px radius, soft shadow), #2563eb actions,
+   #1e293b / #334155 / #64748b text.
+===================================================== */
+
+
+/* =====================================
+   PAGE CONTAINER + SHARED VALUES
+===================================== */
+
+.rp-container {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-soft: #eff6ff;
+  --green: #22c55e;
+  --text: #1e293b;
+  --label: #334155;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --input-line: #cbd5e1;
+
+  /* One width + one side gutter shared by the header, the menu and the
+     page content, so they always line up and scale together. */
+  --rp-max: 1280px;
+  --rp-gutter: 30px;
+
+  position: relative;            /* the menu is positioned against this box */
+  display: flow-root;
+  min-height: 100vh;
+  background: #f4f7fc;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.rp-container *,
+.rp-container *::before,
+.rp-container *::after {
+  box-sizing: border-box;
+}
+
+/* :where() keeps these resets weaker than the class rules below */
+:where(.rp-container) button,
+:where(.rp-container) input,
+:where(.rp-container) select {
+  font: inherit;
+}
+
+:where(.rp-container) button {
+  cursor: pointer;
+}
+
+.rp-container :focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 2px;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.rp-header {
+  position: relative;
+  z-index: 900;
+  height: 72px;
+  width: calc(100% - (var(--rp-gutter) * 2));
+  max-width: var(--rp-max);
+  margin: 30px auto 0;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.rp-menu-toggle {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.rp-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.rp-brand {
+  margin: 0 0 0 14px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.rp-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rp-user-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.rp-user-text strong {
+  font-size: 15px;
+}
+
+.rp-user-text small {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.rp-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+
+/* =====================================
+   FLOATING MENU
+===================================== */
+
+.rp-menu {
+  position: absolute;
+  top: 102px;
+  left: max(var(--rp-gutter), calc((100% - var(--rp-max)) / 2));
+  z-index: 1000;
+  width: 290px;
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  animation: rpMenuOpen 0.2s ease;
+}
+
+@keyframes rpMenuOpen {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rp-menu-item {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
+}
+
+.rp-menu-item:hover {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.rp-menu-item.active,
+.rp-menu-item.active:hover {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.rp-menu-item.logout:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.rp-menu-icon {
+  width: 24px;
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rp-menu-icon svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #475569;
+  stroke-width: 2;
+}
+
+.rp-menu-item:hover .rp-menu-icon svg {
+  color: #2563eb;
+}
+
+.rp-menu-item.active .rp-menu-icon svg,
+.rp-menu-item.active:hover .rp-menu-icon svg {
+  color: #ffffff;
+}
+
+.rp-menu-divider {
+  height: 1px;
+  margin: 6px 8px;
+  background: var(--line);
+}
+
+
+/* =====================================
+   CONTENT + PAGE HEADING
+===================================== */
+
+.rp-content {
+  padding: 30px var(--rp-gutter);
+}
+
+.rp-page {
+  width: 100%;
+  max-width: var(--rp-max);
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.rp-page > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.rp-page-head {
+  margin-bottom: 20px;
+}
+
+.rp-page-head h2 {
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 28px;
+}
+
+.rp-page-head p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+/* =====================================
+   TABS
+===================================== */
+
+.rp-tabs {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rp-tab {
+  padding: 11px 20px;
+  border: 1px solid var(--input-line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--label);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.rp-tab:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.rp-tab--active,
+.rp-tab--active:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #ffffff;
+}
+
+
+/* =====================================
+   CARDS + SMALL TEXT
+===================================== */
+
+.rp-card {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.rp-card h3 {
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 20px;
+}
+
+.rp-card-sub {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rp-state {
+  margin-bottom: 20px;
+  padding: 36px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  color: var(--muted);
+  text-align: center;
+}
+
+.rp-strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rp-faint {
+  color: var(--muted);
+}
+
+
+/* =====================================
+   TOOLBAR + FORM CONTROLS
+   (same look as the auth inputs and selects)
+===================================== */
+
+.rp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rp-input,
+.rp-select {
+  padding: 12px 14px;
+  border: 1px solid var(--input-line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.rp-input--grow {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.rp-select {
+  max-width: 100%;
+}
+
+.rp-select--wide {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.rp-input:focus,
+.rp-select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.rp-select option {
+  color: var(--text);
+  background: #ffffff;
+}
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.rp-btn {
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.rp-btn--outline {
+  background: #ffffff;
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.rp-btn--outline:hover {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+
+/* =====================================
+   TABLES
+===================================== */
+
+.rp-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.rp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rp-table th {
+  padding: 12px 14px;
+  background: #f8fafc;
+  color: var(--label);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rp-table td {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--label);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.rp-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.rp-table small {
+  font-size: 12.5px;
+}
+
+.rp-name {
+  min-width: 240px;
+  max-width: 460px;
+  overflow-wrap: anywhere;
+}
+
+.rp-muted-row {
+  opacity: 0.65;
+}
+
+.rp-empty {
+  padding: 28px !important;
+  color: var(--muted) !important;
+  text-align: center;
+}
+
+
+/* =====================================
+   BADGES + PILLS
+===================================== */
+
+.rp-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rp-badge--completed,
+.rp-badge--enabled,
+.rp-badge--active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.rp-badge--in-progress {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.rp-badge--disabled,
+.rp-badge--inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.rp-badge--not-attempted {
+  background: #f1f5f9;
+  color: var(--muted);
+}
+
+.rp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rp-pills--spaced {
+  margin-bottom: 18px;
+}
+
+.rp-pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rp-pill--ok {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.rp-pill--warn {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.rp-pill--muted {
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+}
+
+.rp-subject-head {
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 20px;
+}
+
+
+/* =====================================
+   PROGRESS BARS
+===================================== */
+
+.rp-progress {
+  width: 100%;
+  height: 10px;
+  background: var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.rp-progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.rp-progress-cell {
+  min-width: 170px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rp-progress-cell .rp-progress {
+  flex: 1;
+}
+
+.rp-progress-cell span {
+  min-width: 40px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+}
+
+
+/* =====================================
+   WINDOW (modal)
+===================================== */
+
+.rp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.rp-modal {
+  width: min(900px, 100%);
+  max-height: calc(100vh - 48px);
+  padding: 26px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.rp-modal-head {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rp-modal-head h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.rp-modal-close {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 1px solid var(--input-line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--label);
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.rp-modal-close:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 768px) {
+
+  .rp-container {
+    --rp-gutter: 15px;
+  }
+
+  .rp-header {
+    height: 66px;
+    margin-top: 15px;
+    padding: 0 14px;
+  }
+
+  .rp-brand {
+    margin-left: 8px;
+    font-size: 20px;
+  }
+
+  .rp-user-text {
+    display: none;
+  }
+
+  .rp-menu {
+    top: 91px;
+    width: calc(100% - 30px);
+    max-width: 320px;
+  }
+
+  .rp-content {
+    padding: 15px var(--rp-gutter);
+  }
+
+  .rp-page-head h2 {
+    font-size: 24px;
+  }
+
+  .rp-card {
+    padding: 20px;
+  }
+
+  .rp-tab {
+    flex: 1 1 auto;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .rp-select {
+    flex: 1 1 100%;
+  }
+
+  .rp-modal-overlay {
+    padding: 12px;
+  }
+
+  .rp-modal {
+    max-height: calc(100vh - 24px);
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .rp-container {
+    --rp-gutter: 12px;
+  }
+
+  .rp-header {
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+
+  .rp-menu {
+    top: 86px;
+    width: calc(100% - 24px);
+    max-width: none;
+  }
+
+  .rp-card {
+    padding: 16px;
+  }
+}
+
+
+/* Respect the "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+
+  .rp-container *,
+  .rp-container *::before,
+  .rp-container *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

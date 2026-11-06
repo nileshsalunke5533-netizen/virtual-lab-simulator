@@ -1,0 +1,211 @@
+/* ===================================================
+   DASHBOARD ONLY CSS
+   Applies only to Dashboard.jsx
+=================================================== */
+
+.dashboard{
+    min-height:100vh;
+    background:#f4f7fc;
+    padding:30px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.dashboard .dashboard-header{
+    background:linear-gradient(135deg,#1565C0,#1E88E5);
+    color:#fff;
+    height:75px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.dashboard .menu-icon{
+    width:45px;
+    height:45px;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:28px;
+    transition:.3s;
+}
+
+.dashboard .menu-icon:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.dashboard .dashboard-title{
+    flex:1;
+    text-align:center;
+    margin:0;
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* ================= SIDE MENU ================= */
+
+.dashboard .side-menu{
+    position:absolute;
+    top:90px;
+    left:20px;
+    z-index:1000;
+}
+
+/* ================= CARD ================= */
+
+.dashboard .dashboard-section{
+    background:#fff;
+    margin-top:28px;
+    padding:28px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.dashboard .dashboard-section:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= WELCOME ================= */
+
+.dashboard .welcome-text{
+    margin:0;
+    font-size:30px;
+    color:#222;
+}
+
+.dashboard .username{
+    color:#1565C0;
+    font-weight:700;
+}
+
+.dashboard .dashboard-section p{
+    margin-top:12px;
+    color:#666;
+    line-height:1.6;
+    font-size:16px;
+}
+
+/* ================= SUBJECTS ================= */
+
+.dashboard .dashboard-section h3{
+    color:#222;
+    margin-bottom:20px;
+}
+
+.dashboard .subject-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.dashboard .subject-btn{
+    background:#fff;
+    border:2px solid #1565C0;
+    border-radius:15px;
+    min-height:90px;
+    padding:18px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:600;
+    color:#1565C0;
+    transition:.3s;
+    text-align:left;
+}
+
+.dashboard .subject-btn:hover{
+    background:#1565C0;
+    color:#fff;
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(21,101,192,.25);
+}
+
+/* ================= RECENT ================= */
+
+.dashboard .activity-box{
+    background:#eef5ff;
+    border-left:5px solid #1565C0;
+    border-radius:10px;
+    padding:18px;
+}
+
+.dashboard .activity-box p{
+    margin:0;
+    font-size:16px;
+    color:#444;
+}
+
+.dashboard .activity-box strong{
+    color:#1565C0;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.dashboard::-webkit-scrollbar{
+    width:8px;
+}
+
+.dashboard::-webkit-scrollbar-thumb{
+    background:#1565C0;
+    border-radius:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:768px){
+
+.dashboard{
+    padding:15px;
+}
+
+.dashboard .dashboard-header{
+    height:auto;
+    padding:15px;
+}
+
+.dashboard .dashboard-title{
+    font-size:22px;
+}
+
+.dashboard .welcome-text{
+    font-size:24px;
+}
+
+.dashboard .subject-list{
+    grid-template-columns:1fr;
+}
+
+.dashboard .subject-btn{
+    min-height:75px;
+    font-size:16px;
+}
+
+}
+
+@media (max-width:480px){
+
+.dashboard .dashboard-header{
+    flex-direction:column;
+    gap:10px;
+}
+
+.dashboard .dashboard-title{
+    text-align:center;
+}
+
+.dashboard .menu-icon{
+    align-self:flex-start;
+}
+
+.dashboard .dashboard-section{
+    padding:20px;
+}
+
+}

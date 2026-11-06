@@ -1,0 +1,1061 @@
+/* ===============================
+   DCN Experiment 10 CSS
+   Implementing a TCP/IP Network Configuration
+================================ */
+
+/* ── Color Tokens ───────────────── */
+:root {
+  --orange: #e07b2a;
+  --green: #2db34a;
+  --green-dark: #1e8e3e;
+  --red: #e53935;
+  --blue: #2c3e7a;
+  --bg: #f7f8fc;
+  --card: #ffffff;
+  --border: #dde1ea;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Reset ───────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── Root ───────────────────────── */
+.DCNExperiment10-root {
+  max-width: 1500px;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Header ─────────────────────── */
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exp-title {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn-back,
+.btn-help {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dcn-help-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgb(15 23 42 / 55%); }
+.dcn-help-dialog { width: min(100%, 480px); max-height: 80vh; overflow-y: auto; padding: 22px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); box-shadow: 0 16px 44px rgb(15 23 42 / 24%); }
+.dcn-help-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.dcn-help-header h2 { margin: 0; font-size: 18px; }
+.dcn-help-close { border: 0; background: transparent; color: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+.dcn-help-items { display: grid; gap: 10px; padding-left: 20px; margin: 14px 0 20px; }
+.dcn-help-items li { font-size: 13px; line-height: 1.55; }
+.dcn-help-done { display: block; margin-left: auto; padding: 9px 16px; border: 0; border-radius: 6px; background: var(--blue); color: #fff; font-weight: 600; cursor: pointer; }
+
+/* ── Cards ─────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+/* ── Section Headings ──────────── */
+.section-heading {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.orange {
+  color: var(--orange);
+}
+
+/* ── Collapsible ───────────────── */
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.collapsible-body {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.collapsible-body p {
+  margin-bottom: 6px;
+}
+
+.proc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.proc-col {
+  padding-left: 18px;
+}
+
+.proc-col li {
+  margin-bottom: 6px;
+}
+
+/* ── Simulation Layout (3-column) ── */
+.sim-row {
+  display: grid;
+  grid-template-columns: 20% 58% 22%;
+  gap: 14px;
+}
+
+/* ── Left Panel: Progress ─────── */
+.inputs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.toggle-label {
+  font-size: 12px;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 4px 0 6px;
+}
+
+/* ── Center Panel: Simulation ──── */
+.canvas-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Step Guidance Banner (parity between real PC & web app) ── */
+.step-guide {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: linear-gradient(135deg, #fff7ec, #fef1e0);
+  border: 1px solid #f2cd9a;
+  border-left: 4px solid var(--orange);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.step-guide-icon {
+  font-size: 16px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.step-guide-text {
+  font-size: 12.5px;
+  color: #7a4a12;
+  line-height: 1.45;
+}
+
+.step-guide-text strong {
+  color: #8a3d00;
+}
+
+.step-guide-count {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.canvas-area {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Monitor Frame (bezel around the simulated screen) ── */
+.canvas-area.os-screen {
+  position: relative;
+  flex-direction: column;
+  padding: 10px !important;
+  background: #14161c;
+  border-radius: 14px;
+  overflow: visible;
+}
+
+.canvas-area.os-screen::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 7px;
+  background: #1c1e24;
+  border-radius: 0 0 5px 5px;
+  margin: 0 auto;
+}
+
+/* ── The actual desktop screen (realistic light wallpaper) ── */
+.os-desktop-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.25), transparent 45%),
+    linear-gradient(150deg, #4f9ce8 0%, #3f7fd1 45%, #2f5fb0 100%);
+  border-radius: 6px;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ── Desktop icon grid (top-left columns, real Windows layout) ── */
+.desktop {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 88px;
+  grid-auto-flow: column;
+  gap: 4px;
+  align-content: start;
+  justify-content: start;
+  padding: 16px 10px;
+}
+
+.desktop-icon {
+  width: 80px;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  cursor: pointer;
+  color: rgb(177, 20, 20);
+  border-radius: 4px;
+  padding: 6px 2px;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.15);
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.desktop-icon.disabled {
+  cursor: not-allowed;
+}
+
+.desktop-icon.disabled:hover {
+  background: transparent;
+  outline: none;
+}
+
+/* real icon tile look */
+.desktop-icon-glyph {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: linear-gradient(160deg, #ffffff, #e2e6ee);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  margin-bottom: 5px;
+}
+
+.desktop-icon.disabled .desktop-icon-glyph {
+  opacity: 0.6;
+  filter: grayscale(0.25);
+}
+
+.desktop-icon span {
+  display: block;
+  font-size: 10.5px;
+  line-height: 1.25;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  max-width: 76px;
+  word-wrap: break-word;
+}
+
+/* ── Windows/dialogs float centered over the wallpaper ── */
+.os-desktop-area > .win {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+}
+
+.os-desktop-area > .win::-webkit-scrollbar {
+  width: 6px;
+}
+.os-desktop-area > .win::-webkit-scrollbar-thumb {
+  background: #c7cbe0;
+  border-radius: 3px;
+}
+
+/* ── Window chrome (title bar) ─────────────── */
+.win {
+  width: 100%;
+  max-width: 640px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.win-dialog {
+  max-width: 500px;
+}
+
+.win-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, #3a5fbf, var(--blue));
+  color: white;
+  padding: 0 6px 0 12px;
+  height: 36px;
+}
+
+.win-title-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.win-title-icon {
+  font-size: 14px;
+}
+
+.win-controls {
+  display: flex;
+  height: 100%;
+}
+
+.win-btn {
+  width: 42px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.win-close:hover {
+  background: #e53935;
+}
+
+/* ── Breadcrumb address bar ────── */
+.win-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f6fb;
+  border-bottom: 1px solid var(--border);
+  padding: 6px 12px;
+}
+
+.crumb-arrow {
+  font-size: 13px;
+  color: var(--blue);
+  cursor: default;
+}
+
+.crumb-arrow.disabled {
+  color: #b7bdd0;
+}
+
+.crumb-path {
+  flex: 1;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: var(--text);
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.crumb-sep {
+  color: var(--muted);
+  margin: 0 4px;
+}
+
+.crumb-search {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ── Window body ───────────────── */
+.win-body {
+  padding: 20px;
+}
+
+.win-body h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.win-body h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+.win-body p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.window-subtext {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ── Control Panel Categories Grid ── */
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.cp-card {
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 6px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: 0.15s;
+}
+
+.cp-card.active {
+  cursor: pointer;
+  opacity: 1;
+  border-color: var(--blue);
+  background: #eef1fb;
+}
+
+.cp-card.active:hover {
+  background: #e3e8fa;
+}
+
+.cp-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.cp-sidebar-link {
+  font-size: 12px;
+  color: var(--blue);
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.cp-sidebar-link:hover {
+  text-decoration: underline;
+}
+
+.cp-sidebar-link.disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.cp-sidebar-link.disabled:hover {
+  text-decoration: none;
+}
+
+/* ── Network and Internet category list ── */
+.netcat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.netcat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  background: #f9fafb;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.netcat-item.active {
+  opacity: 1;
+  cursor: pointer;
+  border-color: var(--blue);
+  background: #eef1fb;
+}
+
+.netcat-item.active:hover {
+  background: #e3e8fa;
+}
+
+.netcat-icon {
+  font-size: 22px;
+}
+
+.netcat-item strong {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.netcat-item p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Network map box ───────────── */
+.netmap-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.netmap-line {
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ── Network Connections (adapter list) ── */
+.adapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.adapter-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  background: #f9fafb;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.adapter-item.active {
+  opacity: 1;
+  cursor: pointer;
+  border-color: var(--green);
+  background: #eefdf3;
+}
+
+.adapter-item.active:hover {
+  background: #e1fbe9;
+}
+
+.adapter-item-icon {
+  font-size: 24px;
+}
+
+.adapter-item h4 {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.adapter-item p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Adapter Status card ───────── */
+.adapter-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.adapter-icon {
+  font-size: 44px;
+}
+
+/* ── Checkbox List ─────────────── */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0;
+  font-size: 13px;
+}
+
+.checkbox-list input {
+  margin-right: 8px;
+}
+
+/* ── PC selector tabs (LAN has two nodes: PC-A / PC-B) ── */
+.pc-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pc-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f4f6fb;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.pc-tab.active {
+  border-color: var(--blue);
+  background: #eef1fb;
+  color: var(--blue);
+}
+
+.pc-tab.configured::after {
+  content: " ✓";
+  color: var(--green);
+}
+
+/* ── IP Form ───────────────────── */
+.ip-form {
+  display: grid;
+  gap: 14px;
+}
+
+.ip-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ip-form input {
+  margin-top: 6px;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ── Terminal ──────────────────── */
+.terminal {
+  background: #0d1815;
+  color: #4fd48a;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.terminal p {
+  margin: 4px 0;
+  color: #4fd48a;
+}
+
+.terminal .terminal-divider {
+  border: none;
+  border-top: 1px dashed #285244;
+  margin: 8px 0;
+}
+
+.terminal .terminal-heading {
+  color: #7fe6b3;
+  font-weight: 700;
+}
+
+/* ── Policy / config summary chips (used for saved PC-A / PC-B config) ── */
+.policy-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.policy-summary-group-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-top: 8px;
+}
+
+.policy-summary-group-label:first-child {
+  margin-top: 0;
+}
+
+.policy-chip {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.policy-chip span:last-child {
+  font-weight: 700;
+  color: var(--blue);
+}
+
+/* ── Buttons inside windows ────── */
+.btn-verify {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  background: var(--green);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.btn-reset {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.menu-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #f4f6fb;
+  color: var(--blue);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-btn:hover {
+  background: #e8ecf8;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Result Boxes ──────────────── */
+.result-box {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.result-box.success {
+  background: #ecfdf5;
+  color: var(--green-dark);
+  border: 1px solid rgba(45, 179, 74, 0.3);
+}
+
+.result-card {
+  background: #f4f6fb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.result-card p {
+  font-size: 13px;
+  color: var(--green-dark);
+  margin: 6px 0;
+}
+
+/* ── Success Icons ─────────────── */
+.success-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.success-icon.big {
+  font-size: 64px;
+}
+
+/* ── Loading Bar ───────────────── */
+.loading-box {
+  width: 100%;
+  height: 14px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.loading-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--green);
+  animation: loading 2s linear;
+}
+
+@keyframes loading {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ── Right Panel: Result ──────── */
+.analysis-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.analysis-block {
+  background: #f4f6fb;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.analysis-sub {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.conclusion-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.status-verified {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.status-pending {
+  color: var(--muted);
+}
+
+/* ── Observation Table ─────────── */
+.table-section {
+  margin-top: 4px;
+}
+
+.obs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.obs-table th {
+  background: var(--blue);
+  color: white;
+  padding: 8px;
+}
+
+.obs-table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.row-verified {
+  background: #ecfdf5;
+}
+
+/* ── Submit ────────────────────── */
+.submit-section-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+
+.submit-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.submit-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.submitted-note {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.btn-submit {
+  padding: 12px 40px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-submit.enabled {
+  background: var(--green);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-submit.disabled {
+  background: #999;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ── Responsive ─────────────── */
+@media (max-width: 900px) {
+  .sim-row {
+    grid-template-columns: 1fr;
+  }
+
+  .proc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .canvas-area {
+    padding: 12px;
+  }
+
+  .desktop {
+    grid-template-columns: repeat(auto-fill, 68px);
+    grid-auto-rows: 76px;
+    padding: 10px 6px;
+  }
+
+  .desktop-icon {
+    width: 68px;
+    height: 76px;
+  }
+
+  .desktop-icon-glyph {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .win {
+    max-width: 92%;
+  }
+
+  .os-desktop-area > .win {
+    width: 92%;
+    max-height: calc(100% - 24px);
+  }
+
+  .step-guide {
+    padding: 8px 10px;
+  }
+}

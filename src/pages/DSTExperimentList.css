@@ -1,0 +1,333 @@
+/* =====================================
+   GLOBAL
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =====================================
+   PAGE
+===================================== */
+
+.dst-experiment-list-page {
+    min-height: 100vh;
+    padding: 35px 7%;
+    background: #ffffff;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.dst-page-header {
+    display: grid;
+    grid-template-columns: 160px 1fr 160px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dst-header-space {
+    width: 160px;
+}
+
+.dst-page-title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    color: #183a8a;
+}
+
+
+/* =====================================
+   SUBTITLE
+===================================== */
+
+.dst-page-subtitle {
+    text-align: center;
+    font-size: 23px;
+    color: #3762d4;
+    margin-bottom: 35px;
+}
+
+
+/* =====================================
+   BACK BUTTON
+===================================== */
+
+.dst-back-btn {
+    width: 100px;
+    padding: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2e50cb;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.dst-back-btn:hover {
+    background: #2143b4;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================
+   EXPERIMENT GRID
+===================================== */
+
+.dst-experiment-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(380px, 1fr));
+
+    gap: 28px;
+}
+
+
+/* =====================================
+   EXPERIMENT CARD
+===================================== */
+
+.dst-experiment-card {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+
+    min-height: 250px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    border: 1px solid #000000;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.06);
+
+    transition: 0.3s ease;
+}
+
+.dst-experiment-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =====================================
+   CARD HEADER
+===================================== */
+
+.dst-card-header {
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================
+   EXPERIMENT NUMBER
+===================================== */
+
+.dst-experiment-number {
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #1f3b8f;
+}
+
+
+/* =====================================
+   EXPERIMENT TITLE
+===================================== */
+
+.dst-experiment-title {
+    flex: 1;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #444;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================
+   START BUTTON
+===================================== */
+
+.dst-start-btn {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f3bd9,
+            #3d66ce
+        );
+
+    transition: 0.3s;
+}
+
+.dst-start-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 22px rgba(46, 80, 203, 0.25);
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 768px) {
+
+    .dst-experiment-list-page {
+        padding: 25px 5%;
+    }
+
+    .dst-page-header {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .dst-header-space {
+        display: none;
+    }
+
+    .dst-page-title {
+        font-size: 27px;
+        line-height: 1.3;
+    }
+
+    .dst-page-subtitle {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    .dst-back-btn {
+        width: 120px;
+    }
+
+    .dst-experiment-list {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .dst-experiment-card {
+        min-height: 240px;
+
+        padding: 18px;
+    }
+
+    .dst-card-header {
+        display: flex;
+
+        flex-direction: row;
+
+        justify-content: flex-start;
+
+        align-items: center;
+
+        gap: 10px;
+    }
+
+    .dst-experiment-number {
+        font-size: 15px;
+    }
+
+    .dst-experiment-title {
+        font-size: 15px;
+
+        line-height: 1.6;
+    }
+
+    .dst-start-btn {
+        padding: 13px;
+
+        font-size: 15px;
+    }
+}
+
+
+/* =====================================
+   SMALL MOBILE
+===================================== */
+
+@media (max-width: 480px) {
+
+    .dst-experiment-list-page {
+        padding: 20px 4%;
+    }
+
+    .dst-page-title {
+        font-size: 23px;
+    }
+
+    .dst-page-subtitle {
+        font-size: 18px;
+    }
+
+    .dst-card-header {
+        align-items: flex-start;
+    }
+
+    .dst-experiment-number {
+        font-size: 14px;
+    }
+
+    .dst-experiment-title {
+        font-size: 14px;
+    }
+}

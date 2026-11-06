@@ -1,0 +1,1539 @@
+/* =========================================================
+   IFS EXPERIMENT 4
+   KEYLOGGER & ANTI-KEYLOGGER
+   SCOPED CSS — ONLY FOR IFS EXPERIMENT 4
+========================================================= */
+
+.ifs4-root {
+  --ifs4-orange: #e07b2a;
+  --ifs4-green: #2db34a;
+  --ifs4-green-dark: #1e8e3e;
+  --ifs4-red: #e53935;
+  --ifs4-blue-header: #2c3e7a;
+  --ifs4-blue-row: #2c4fa0;
+
+  --ifs4-bg: #f7f8fc;
+  --ifs4-card-bg: #ffffff;
+  --ifs4-border: #dde1ea;
+  --ifs4-text: #1a1a2e;
+  --ifs4-text-muted: #6b7280;
+  --ifs4-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  background: var(--ifs4-bg);
+  color: var(--ifs4-text);
+
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.ifs4-root *,
+.ifs4-root *::before,
+.ifs4-root *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ifs4-root .exp-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.ifs4-root .exp-title {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ifs4-root .btn-back,
+.ifs4-root .btn-help {
+  background: var(--ifs4-blue-header);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ifs4-root .btn-back:hover,
+.ifs4-root .btn-help:hover {
+  opacity: 0.85;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.ifs4-root .card {
+  width: 100%;
+  background: var(--ifs4-card-bg);
+  border: 1px solid var(--ifs4-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: var(--ifs4-shadow);
+  min-width: 0;
+}
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.ifs4-root .section-heading {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ifs4-root .section-heading.orange,
+.ifs4-root .panel-heading.orange {
+  color: var(--ifs4-orange);
+}
+
+.ifs4-root .panel-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   AIM
+========================================================= */
+
+.ifs4-root .aim-card p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   THEORY / PROCEDURE
+========================================================= */
+
+.ifs4-root .collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ifs4-root .chevron {
+  font-size: 12px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .collapsible-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ifs4-root .collapsible-body p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ifs4-root .proc-grid {
+  flex-direction: row;
+  gap: 40px;
+}
+
+.ifs4-root .proc-col {
+  list-style: decimal;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ifs4-root .proc-col li {
+  font-size: 13px;
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.ifs4-root .experiment-tabs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.ifs4-root .experiment-tab {
+  flex: 1;
+  border: 1px solid var(--ifs4-border);
+  background: #fff;
+  color: var(--ifs4-text-muted);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ifs4-root .experiment-tab:hover {
+  border-color: var(--ifs4-blue-header);
+  color: var(--ifs4-blue-header);
+}
+
+.ifs4-root .experiment-tab.active {
+  background: var(--ifs4-blue-header);
+  border-color: var(--ifs4-blue-header);
+  color: #fff;
+}
+
+.ifs4-root .tab-check {
+  margin-left: 8px;
+  color: var(--ifs4-green);
+  font-weight: 900;
+}
+
+.ifs4-root .experiment-tab.active .tab-check {
+  color: #fff;
+}
+
+/* =========================================================
+   MAIN SIMULATION ROW
+   20% / 58% / 22%
+========================================================= */
+
+.ifs4-root .sim-row {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 20fr)
+    minmax(0, 58fr)
+    minmax(190px, 22fr);
+
+  gap: 12px;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.ifs4-root .inputs-panel,
+.ifs4-root .canvas-panel,
+.ifs4-root .analysis-panel {
+  min-width: 0;
+  width: 100%;
+}
+
+/* =========================================================
+   INPUT PANEL
+========================================================= */
+
+.ifs4-root .inputs-panel {
+  padding: 16px;
+}
+
+.ifs4-root .field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ifs4-root .text-input {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--ifs4-border);
+  border-radius: 6px;
+  padding: 9px 10px;
+  font-size: 13px;
+  outline: none;
+  text-transform: uppercase;
+  background: #fff;
+}
+
+.ifs4-root .text-input:focus {
+  border-color: var(--ifs4-blue-header);
+}
+
+.ifs4-root .text-input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.ifs4-root .char-count {
+  display: block;
+  text-align: right;
+  color: var(--ifs4-text-muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.ifs4-root .input-note {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ifs4-text-muted);
+  line-height: 1.45;
+}
+
+/* =========================================================
+   DRAG SECTION
+========================================================= */
+
+.ifs4-root .drag-heading {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ifs4-border);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ifs4-root .drag-heading b {
+  font-size: 11px;
+  color: var(--ifs4-blue-header);
+}
+
+.ifs4-root .drag-heading small {
+  font-size: 10px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .drag-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ifs4-root .drag-item {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  background: #fff;
+
+  cursor: grab;
+  transition: 0.2s ease;
+}
+
+.ifs4-root .drag-item:active {
+  cursor: grabbing;
+}
+
+.ifs4-root .drag-item.drag-highlight {
+  border-color: var(--ifs4-orange);
+  background: #fff8ef;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(224, 123, 42, 0.08);
+}
+
+.ifs4-root .drag-item.drag-used {
+  opacity: 0.6;
+  cursor: default;
+  background: #f1fbf3;
+  border-color: #b9e4c3;
+}
+
+.ifs4-root .drag-icon {
+  flex: 0 0 auto;
+  width: 26px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.ifs4-root .drag-content {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ifs4-root .drag-content b {
+  font-size: 11px;
+}
+
+.ifs4-root .drag-content small {
+  font-size: 9px;
+  color: var(--ifs4-text-muted);
+  line-height: 1.3;
+}
+
+.ifs4-root .drag-handle {
+  margin-left: auto;
+  color: var(--ifs4-text-muted);
+  font-size: 16px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.ifs4-root .action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ifs4-root .full-width {
+  width: 100%;
+}
+
+.ifs4-root .btn-start,
+.ifs4-root .btn-reset {
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ifs4-root .btn-start {
+  background: var(--ifs4-green);
+  color: #fff;
+}
+
+.ifs4-root .btn-start:hover {
+  background: var(--ifs4-green-dark);
+}
+
+.ifs4-root .btn-reset {
+  background: var(--ifs4-red);
+  color: #fff;
+}
+
+.ifs4-root .btn-reset:hover {
+  background: #c62828;
+}
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+.ifs4-root .canvas-panel {
+  padding: 16px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ifs4-root .canvas-area {
+  width: 100%;
+  max-width: 100%;
+  min-height: 390px;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  background: #fafbfe;
+  padding: 14px;
+
+  overflow: auto;
+}
+
+/* =========================================================
+   SIMULATION PROGRESS
+========================================================= */
+
+.ifs4-root .simulation-progress {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0 0 12px;
+}
+
+.ifs4-root .progress-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  color: #9ca3af;
+}
+
+.ifs4-root .progress-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: #e3e6ec;
+  top: 13px;
+  left: 58%;
+  width: 84%;
+  z-index: 0;
+}
+
+.ifs4-root .progress-step span {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+
+  border-radius: 50%;
+  background: #e9ebf0;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.ifs4-root .progress-step small {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+}
+
+.ifs4-root .progress-step.active {
+  color: var(--ifs4-orange);
+}
+
+.ifs4-root .progress-step.active span {
+  background: var(--ifs4-orange);
+  color: #fff;
+}
+
+.ifs4-root .progress-step.completed {
+  color: var(--ifs4-green-dark);
+}
+
+.ifs4-root .progress-step.completed span {
+  background: var(--ifs4-green);
+  color: #fff;
+}
+
+.ifs4-root .progress-step.completed:not(:last-child)::after {
+  background: var(--ifs4-green);
+}
+
+/* =========================================================
+   DEFAULT PREVIEW
+========================================================= */
+
+.ifs4-root .default-preview {
+  width: 100%;
+  min-height: 355px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ifs4-root .preview-card {
+  width: min(760px, 100%);
+  max-width: 100%;
+
+  background: #fff;
+  border: 1px solid var(--ifs4-border);
+  border-radius: 10px;
+
+  padding: 24px;
+  text-align: center;
+
+  box-shadow: var(--ifs4-shadow);
+}
+
+.ifs4-root .preview-title {
+  color: var(--ifs4-blue-header);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.ifs4-root .preview-card p {
+  color: var(--ifs4-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ifs4-root .preview-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.ifs4-root .preview-flow span {
+  padding: 9px 12px;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 7px;
+
+  background: #f8f9fc;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ifs4-root .preview-flow b {
+  color: var(--ifs4-orange);
+}
+
+.ifs4-root .preview-note {
+  padding: 10px;
+
+  border-radius: 7px;
+
+  background: #fff8ef;
+  border: 1px solid #f2d6b8;
+
+  font-size: 11px;
+  color: #6b4b2d;
+}
+
+/* =========================================================
+   ACTIVE SIMULATION
+========================================================= */
+
+.ifs4-root .simulation-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+.ifs4-root .canvas-instruction {
+  width: 100%;
+
+  border-radius: 7px;
+  padding: 9px 11px;
+
+  background: #eef2fb;
+  border: 1px solid #d9e0f1;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.ifs4-root .canvas-instruction span {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--ifs4-blue-header);
+  font-weight: 700;
+}
+
+.ifs4-root .canvas-instruction b {
+  min-width: 0;
+  font-size: 11px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   SYSTEM FLOW
+========================================================= */
+
+.ifs4-root .system-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 10px 0;
+
+  overflow-x: auto;
+}
+
+.ifs4-root .system-node,
+.ifs4-root .drop-zone {
+  flex: 0 0 105px;
+  min-height: 105px;
+
+  border: 1px dashed #cfd4de;
+  border-radius: 9px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 8px;
+  background: #fff;
+}
+
+.ifs4-root .system-node span,
+.ifs4-root .drop-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.ifs4-root .system-node b,
+.ifs4-root .drop-zone b {
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.ifs4-root .drop-zone small,
+.ifs4-root .system-node small {
+  font-size: 8px;
+  color: var(--ifs4-text-muted);
+  margin-top: 3px;
+  overflow-wrap: anywhere;
+}
+
+.ifs4-root .drop-zone.drop-active {
+  border: 2px dashed var(--ifs4-orange);
+  background: #fffaf5;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(224, 123, 42, 0.08);
+}
+
+.ifs4-root .drop-zone.drop-completed {
+  border-style: solid;
+  border-color: var(--ifs4-green);
+  background: #f1fbf3;
+}
+
+.ifs4-root .drop-zone.drop-completed .drop-icon {
+  color: var(--ifs4-green-dark);
+}
+
+.ifs4-root .node-done {
+  border-color: var(--ifs4-green);
+  background: #f1fbf3;
+}
+
+.ifs4-root .flow-arrow {
+  flex: 0 0 20px;
+  color: var(--ifs4-blue-header);
+  font-size: 19px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* =========================================================
+   SAMPLE DISPLAY
+========================================================= */
+
+.ifs4-root .sample-display-card {
+  width: 100%;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  background: #fff;
+  padding: 12px;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+.ifs4-root .sample-display-card span {
+  display: block;
+
+  font-size: 9px;
+  color: var(--ifs4-text-muted);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.ifs4-root .sample-display-card b {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 18px;
+  letter-spacing: 2px;
+
+  color: var(--ifs4-blue-header);
+
+  min-height: 27px;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   VERIFICATION
+========================================================= */
+
+.ifs4-root .verification-area {
+  width: 100%;
+
+  border-top: 1px solid var(--ifs4-border);
+  padding-top: 13px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+  align-items: center;
+}
+
+.ifs4-root .security-chain {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ifs4-root .security-chain div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.ifs4-root .security-chain small {
+  font-size: 8px;
+  color: var(--ifs4-text-muted);
+  margin-top: 2px;
+}
+
+.ifs4-root .security-chain > span {
+  color: var(--ifs4-orange);
+  font-weight: 800;
+}
+
+.ifs4-root .verify-canvas-btn {
+  border: none;
+
+  background: var(--ifs4-green);
+  color: #fff;
+
+  border-radius: 7px;
+
+  padding: 10px 18px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.ifs4-root .verify-canvas-btn:hover {
+  background: var(--ifs4-green-dark);
+}
+
+.ifs4-root .verified-message {
+  width: 100%;
+
+  padding: 10px;
+
+  text-align: center;
+
+  border-radius: 7px;
+
+  background: #eaf8ee;
+  color: var(--ifs4-green-dark);
+
+  border: 1px solid #b9e4c3;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   LIVE ANALYSIS
+========================================================= */
+
+.ifs4-root .analysis-panel {
+  padding: 16px;
+}
+
+.ifs4-root .analysis-block {
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  padding: 11px;
+
+  background: #fff;
+
+  min-width: 0;
+}
+
+.ifs4-root .analysis-sub {
+  font-size: 11px;
+  margin-bottom: 8px;
+  color: var(--ifs4-blue-header);
+}
+
+.ifs4-root .analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 10px;
+  table-layout: fixed;
+}
+
+.ifs4-root .analysis-table td {
+  padding: 6px 3px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.ifs4-root .analysis-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ifs4-root .analysis-table td:first-child {
+  color: var(--ifs4-text-muted);
+  width: 40%;
+}
+
+.ifs4-root .analysis-table td:nth-child(2) {
+  width: 7%;
+}
+
+.ifs4-root .analysis-table td:last-child {
+  font-weight: 700;
+}
+
+.ifs4-root .security-status {
+  margin-top: 11px;
+
+  padding: 13px 10px;
+
+  border-radius: 8px;
+
+  background: #fff7ed;
+  border: 1px solid #f0d7b7;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  text-align: center;
+
+  gap: 3px;
+}
+
+.ifs4-root .security-status.secure {
+  background: #effaf2;
+  border-color: #b9e4c3;
+}
+
+.ifs4-root .status-icon {
+  font-size: 25px;
+}
+
+.ifs4-root .security-status b {
+  font-size: 11px;
+}
+
+.ifs4-root .security-status small {
+  font-size: 9px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .current-step-box {
+  margin-top: 10px;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  padding: 9px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ifs4-root .current-step-box span {
+  font-size: 9px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .current-step-box b {
+  font-size: 11px;
+  color: var(--ifs4-blue-header);
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   OBSERVATION
+========================================================= */
+
+.ifs4-root .observation-section {
+  margin-top: 0;
+  min-width: 0;
+}
+
+.ifs4-root .table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ifs4-root .obs-table {
+  width: 100%;
+  min-width: 650px;
+
+  border-collapse: collapse;
+
+  font-size: 11px;
+}
+
+.ifs4-root .obs-table th {
+  background: var(--ifs4-blue-header);
+  color: #fff;
+
+  padding: 9px 8px;
+
+  text-align: center;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.ifs4-root .obs-table td {
+  border: 1px solid var(--ifs4-border);
+
+  padding: 8px;
+
+  text-align: center;
+
+  background: #fff;
+}
+
+.ifs4-root .obs-table tbody tr:nth-child(even) td {
+  background: #fafbfc;
+}
+
+.ifs4-root .result-cell {
+  color: var(--ifs4-green-dark);
+  font-weight: 800;
+}
+
+/* =========================================================
+   ASSIGNMENT
+========================================================= */
+
+.ifs4-root .assignment-card {
+  min-height: 180px;
+}
+
+.ifs4-root .assignment-text {
+  font-size: 12px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .assignment-questions {
+  display: grid;
+  gap: 12px;
+  padding-left: 30px;
+}
+
+.ifs4-root .assignment-question {
+  padding: 12px;
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.ifs4-root .assignment-question::marker {
+  color: var(--ifs4-orange);
+  font-weight: 700;
+}
+
+.ifs4-root .assignment-question > p {
+  margin: 0 0 9px;
+  color: var(--ifs4-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ifs4-root .assignment-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.ifs4-root .assignment-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--ifs4-border);
+  border-radius: 6px;
+  color: var(--ifs4-text);
+  font-size: 12px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.ifs4-root .assignment-option input {
+  flex: 0 0 auto;
+  margin: 2px 0 0;
+  accent-color: var(--ifs4-orange);
+}
+
+.ifs4-root .assignment-option-letter {
+  flex: 0 0 auto;
+  color: var(--ifs4-orange);
+}
+
+.ifs4-root .assignment-option:has(input:checked) {
+  border-color: var(--ifs4-orange);
+  background: #fff8f1;
+}
+
+/* =========================================================
+   SIMULATION PROGRESS CARD
+========================================================= */
+
+.ifs4-root .simulation-progress-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  background: #fff;
+  border: 1px solid var(--ifs4-border);
+  border-radius: 10px;
+
+  padding: 13px 16px;
+
+  box-shadow: var(--ifs4-shadow);
+}
+
+.ifs4-root .simulation-progress-card h3 {
+  font-size: 13px;
+}
+
+.ifs4-root .simulation-progress-card p {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--ifs4-text-muted);
+}
+
+.ifs4-root .progress-badge {
+  background: #fff7ed;
+  color: #9a5a18;
+
+  border: 1px solid #f0d7b7;
+  border-radius: 20px;
+
+  padding: 7px 12px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.ifs4-root .progress-badge.completed {
+  background: #eaf8ee;
+  color: var(--ifs4-green-dark);
+  border-color: #b9e4c3;
+}
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.ifs4-root .result-screen {
+  min-height: 390px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  gap: 10px;
+}
+
+.ifs4-root .result-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eaf8ee;
+  color: var(--ifs4-green-dark);
+
+  font-size: 29px;
+  font-weight: 900;
+}
+
+.ifs4-root .result-screen h2 {
+  font-size: 20px;
+  color: var(--ifs4-blue-header);
+}
+
+.ifs4-root .result-screen > p {
+  max-width: 700px;
+  color: var(--ifs4-text-muted);
+  font-size: 12px;
+}
+
+.ifs4-root .result-summary {
+  width: min(700px, 95%);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin: 10px 0;
+}
+
+.ifs4-root .result-summary div {
+  border: 1px solid var(--ifs4-border);
+  border-radius: 8px;
+
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  background: #fafbfe;
+}
+
+.ifs4-root .result-summary span {
+  color: var(--ifs4-text-muted);
+  font-size: 10px;
+}
+
+.ifs4-root .result-summary b {
+  font-size: 12px;
+}
+
+.ifs4-root .new-experiment-btn {
+  border: none;
+  border-radius: 7px;
+
+  background: var(--ifs4-blue-header);
+  color: #fff;
+
+  padding: 10px 17px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.ifs4-root .submit-section {
+  width: 100%;
+
+  padding: 16px;
+
+  text-align: center;
+
+  background: #fff;
+
+  border: 1px solid var(--ifs4-border);
+  border-radius: 10px;
+
+  box-shadow: var(--ifs4-shadow);
+}
+
+.ifs4-root .submit-requirement {
+  margin: 0 0 9px !important;
+
+  font-size: 11px;
+
+  color: var(--ifs4-text-muted);
+
+  font-weight: 600;
+}
+
+.ifs4-root .btn-submit {
+  min-width: 210px;
+
+  border: none;
+  border-radius: 7px;
+
+  padding: 11px 20px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.ifs4-root .btn-submit.enabled {
+  background: var(--ifs4-green);
+  color: #fff;
+}
+
+.ifs4-root .btn-submit.enabled:hover {
+  background: var(--ifs4-green-dark);
+}
+
+.ifs4-root .btn-submit.disabled {
+  background: #d7dbe2;
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   POPUPS
+========================================================= */
+
+.ifs4-root .popup-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(18, 25, 40, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1000;
+
+  padding: 20px;
+}
+
+.ifs4-root .popup-box {
+  width: min(460px, 100%);
+
+  background: #fff;
+
+  border-radius: 10px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0, 0, 0, 0.18);
+
+  text-align: center;
+}
+
+.ifs4-root .popup-icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.ifs4-root .popup-box p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ifs4-root .popup-ok {
+  margin-top: 14px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: var(--ifs4-blue-header);
+  color: #fff;
+
+  padding: 9px 18px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.ifs4-root .help-popup {
+  text-align: left;
+}
+
+.ifs4-root .help-popup ol {
+  padding-left: 19px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  font-size: 12px;
+}
+
+.ifs4-root .help-note {
+  margin-top: 12px;
+
+  padding: 9px;
+
+  background: #fff8ef;
+
+  border: 1px solid #f2d6b8;
+  border-radius: 7px;
+
+  font-size: 11px !important;
+}
+
+.ifs4-root .help-popup .popup-ok {
+  margin-top: 12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+  .ifs4-root .sim-row {
+    grid-template-columns:
+      minmax(170px, 20fr)
+      minmax(0, 55fr)
+      minmax(180px, 25fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .ifs4-root .sim-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ifs4-root .inputs-panel,
+  .ifs4-root .canvas-panel,
+  .ifs4-root .analysis-panel {
+    width: 100%;
+  }
+
+  .ifs4-root .canvas-area {
+    min-height: 360px;
+  }
+
+  .ifs4-root .simulation-canvas {
+    min-width: 0;
+  }
+
+  .ifs4-root .system-flow {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .ifs4-root {
+    padding: 12px 10px 28px;
+    gap: 11px;
+  }
+
+  .ifs4-root .exp-header {
+    flex-wrap: wrap;
+  }
+
+  .ifs4-root .exp-title {
+    order: 3;
+    flex-basis: 100%;
+    font-size: 15px;
+  }
+
+  .ifs4-root .proc-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ifs4-root .experiment-tabs {
+    flex-direction: column;
+  }
+
+  .ifs4-root .canvas-area {
+    padding: 10px;
+    min-height: 350px;
+  }
+
+  .ifs4-root .canvas-instruction {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ifs4-root .canvas-instruction b {
+    text-align: left;
+  }
+
+  .ifs4-root .system-flow {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 14px;
+  }
+
+  .ifs4-root .system-node,
+  .ifs4-root .drop-zone {
+    flex: 0 0 95px;
+    width: 95px;
+    min-height: 95px;
+  }
+
+  .ifs4-root .flow-arrow {
+    flex: 0 0 18px;
+  }
+
+  .ifs4-root .security-chain {
+    gap: 6px;
+  }
+
+  .ifs4-root .btn-submit {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ifs4-root .result-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .ifs4-root .simulation-progress-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

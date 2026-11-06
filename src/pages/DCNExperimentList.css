@@ -1,0 +1,322 @@
+/* =====================================
+   GLOBAL
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Poppins",sans-serif;
+}
+
+/* =====================================
+   PAGE
+===================================== */
+
+.experiment-list-page {
+    min-height: 100vh;
+
+    padding: 35px 7%;
+
+    background: #ffffff;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.page-header{
+
+    display:grid;
+
+    grid-template-columns:160px 1fr 160px;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.header-space{
+
+    width:160px;
+}
+
+.page-title{
+
+    text-align:center;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:#183a8a;
+}
+
+.page-subtitle{
+
+    text-align:center;
+
+    font-size:23px;
+
+    color:#3762d4;
+
+    margin-bottom:35px;
+}
+
+/* =====================================
+   BACK BUTTON
+===================================== */
+
+.back-btn{
+
+    width:100px;
+
+    padding:8px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2e50cb;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.back-btn:hover{
+
+    background:#2143b4;
+
+    transform:translateY(-2px);
+}
+
+/* =====================================
+   GRID
+===================================== */
+
+.experiment-list{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(380px,1fr));
+
+    gap:28px;
+}
+
+/* =====================================
+   CARD
+===================================== */
+
+.experiment-card {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 20px;
+
+    min-height: 250px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    border: 1px solid #000000;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.06);
+
+    transition:
+        0.3s ease;
+}
+
+.experiment-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.12);
+}
+/* =====================================
+   CARD HEADER
+===================================== */
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.experiment-number{
+
+    margin:0;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#1f3b8f;
+}
+
+/* =====================================
+   TITLE
+===================================== */
+
+.experiment-title{
+
+    flex:1;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    color:#444;
+
+    margin-bottom:18px;
+}
+/* =====================================
+   STATUS
+===================================== */
+
+.status{
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
+.attempted{
+
+    background:#dff8e7;
+
+    color:#15803d;
+}
+
+.not-attempted{
+
+    background:#ffe4e4;
+
+    color:#d62828;
+}
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.start-btn{
+
+    width:100%;
+
+    margin-top:auto;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f3bd9,
+        #3d66ce
+    );
+}
+
+.start-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 22px rgba(46,80,203,.25);
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+.page-header{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+}
+
+.header-space{
+
+    display:none;
+}
+
+.page-title{
+
+    font-size:27px;
+}
+
+.page-subtitle{
+
+    font-size:20px;
+}
+
+.back-btn{
+
+    width:120px;
+}
+
+.experiment-list{
+
+    grid-template-columns:1fr;
+}
+
+.card-header{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.status{
+
+    align-self:flex-start;
+}
+
+.experiment-title{
+
+    min-height:auto;
+}
+
+}

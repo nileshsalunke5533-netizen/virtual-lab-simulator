@@ -1,0 +1,1317 @@
+.ifs1-root {
+  --orange: #e07b2a;
+  --green: #2db34a;
+  --green-dark: #1e8e3e;
+  --red: #e53935;
+  --blue-header: #2c3e7a;
+  --blue-row: #2c4fa0;
+  --bg: #f7f8fc;
+  --card-bg: #ffffff;
+  --border: #dde1ea;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.ifs1-root *,
+.ifs1-root *::before,
+.ifs1-root *::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ifs1-root{
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+.ifs1-root{
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 16px 24px 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ifs1-root .exp-header{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.ifs1-root .exp-title{
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ifs1-root .btn-back,
+.ifs1-root .btn-help{
+  background: var(--blue-header);
+  color: #fff;
+
+  border: none;
+  border-radius: 6px;
+
+  padding: 8px 16px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.ifs1-root .card{
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  padding: 16px 18px;
+
+  box-shadow: var(--shadow);
+}
+
+.ifs1-root .section-heading{
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ifs1-root .section-heading.orange,
+.ifs1-root .panel-heading.orange{
+  color: var(--orange);
+}
+
+.ifs1-root .panel-heading{
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   COLLAPSIBLE
+========================================================= */
+
+.ifs1-root .collapsible-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.ifs1-root .chevron{
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ifs1-root .collapsible-body{
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.ifs1-root .proc-grid{
+  flex-direction: row;
+  gap: 40px;
+}
+
+.ifs1-root .proc-col{
+  list-style: decimal;
+  padding-left: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.ifs1-root .proc-col li{
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   STEP TABS
+========================================================= */
+
+.ifs1-root .caesar-step-tabs{
+  display: flex;
+  gap: 8px;
+}
+
+.ifs1-root .caesar-step-tab{
+  flex: 1;
+
+  padding: 10px 6px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  border-radius: 8px;
+  border: 1px solid var(--border);
+
+  background: white;
+
+  cursor: pointer;
+
+  color: var(--text-muted);
+}
+
+.ifs1-root .caesar-step-tab.active{
+  background: var(--blue-header);
+  color: white;
+
+  border-color: var(--blue-header);
+}
+
+
+/* =========================================================
+   SIMULATION FEATURE GRID
+========================================================= */
+
+.ifs1-root .sec-grid{
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+
+  gap: 12px;
+
+  width: 100%;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+   SAME WIDTH + SAME HEIGHT
+========================================================= */
+
+.ifs1-root .sec-card{
+  width: 100%;
+  min-width: 0;
+
+  height: 145px;
+  min-height: 145px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 14px 8px;
+
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+
+  background: #f9fafb;
+
+  cursor: pointer;
+  transition: 0.15s;
+
+  text-align: center;
+}
+
+.ifs1-root .sec-card:hover{
+  border-color: var(--blue-header);
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow);
+}
+
+.ifs1-root .sec-card.done{
+  border-color: var(--green);
+  background: #ecfdf5;
+}
+
+
+/* SAME ICON AREA */
+
+.ifs1-root .sec-card-icon{
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+
+  flex-shrink: 0;
+}
+
+
+/* SAME TITLE AREA */
+
+.ifs1-root .sec-card-label{
+  width: 100%;
+  min-height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--text);
+
+  line-height: 1.25;
+}
+
+
+/* SAME TAGLINE AREA */
+
+.ifs1-root .sec-card-tagline{
+  width: 100%;
+  min-height: 17px;
+
+  font-size: 11px;
+
+  color: var(--text-muted);
+
+  line-height: 1.25;
+}
+
+.ifs1-root .status-verified{
+  color: var(--green);
+
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ifs1-root .status-pending{
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FEATURE DETAIL PAGE
+========================================================= */
+
+.ifs1-root .sec-detail-page{
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  min-height: 0;
+}
+
+
+/* =========================================================
+   DETAIL HEADER
+========================================================= */
+
+.ifs1-root .sec-detail-header{
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.ifs1-root .sec-detail-title{
+  flex: 1;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: var(--blue-header);
+}
+
+.ifs1-root .sec-detail-tag{
+  font-size: 11px;
+  font-weight: 700;
+
+  color: var(--orange);
+
+  background:
+    rgba(224, 123, 42, 0.12);
+
+  padding: 4px 10px;
+
+  border-radius: 20px;
+}
+
+
+/* =========================================================
+   DETAIL TABS
+========================================================= */
+
+.ifs1-root .sec-detail-tabs{
+  display: flex;
+
+  gap: 6px;
+
+  flex-wrap: wrap;
+
+  border-bottom:
+    1px solid var(--border);
+
+  padding-bottom: 10px;
+}
+
+.ifs1-root .sec-detail-tab{
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  border: 1px solid var(--border);
+
+  background: white;
+
+  font-size: 12.5px;
+  font-weight: 600;
+
+  color: var(--text-muted);
+
+  cursor: pointer;
+}
+
+.ifs1-root .sec-detail-tab.active{
+  background: var(--blue-header);
+  color: white;
+
+  border-color: var(--blue-header);
+}
+
+.ifs1-root .sec-detail-tab.viewed:not(.active){
+  border-color: var(--green);
+  color: var(--green);
+}
+
+
+/* =========================================================
+   DETAIL BODY
+   NO EXTRA TOP SPACE
+========================================================= */
+
+.ifs1-root .sec-detail-body{
+  width: 100%;
+
+  flex: 1;
+
+  padding: 0 2px;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   OVERVIEW LAYOUT
+   LEFT 40%
+   RIGHT 60%
+========================================================= */
+
+.ifs1-root .sec-overview-layout{
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 30% 70%;
+
+  gap: 14px;
+
+  align-items: stretch;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   OVERVIEW LEFT SYMBOL
+========================================================= */
+
+.ifs1-root .sec-overview-layout .sec-detail-icon-row{
+  width: 100%;
+
+  min-height: 180px;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f6fb;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  padding: 20px;
+
+  margin: 0;
+
+  font-size: 58px;
+}
+
+
+/* =========================================================
+   OVERVIEW RIGHT CONTENT
+========================================================= */
+
+.ifs1-root .sec-overview-content{
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 10px 18px 10px 4px;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   OVERVIEW DESCRIPTION
+========================================================= */
+
+.ifs1-root .sec-overview-content .sec-detail-text{
+  width: 100%;
+
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
+  color: var(--text);
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   GENERAL DETAIL TEXT
+========================================================= */
+
+.ifs1-root .sec-detail-text{
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
+  color: var(--text);
+
+  margin-bottom: 14px;
+}
+
+.ifs1-root .sec-detail-list{
+  list-style: disc;
+
+  padding-left: 20px;
+
+  font-size: 13px;
+
+  color: var(--text-muted);
+
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   WHERE TO FIND
+========================================================= */
+
+.ifs1-root .sec-path-box{
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: #eef1fb;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  padding: 14px 16px;
+
+  font-size: 13.5px;
+
+  font-weight: 600;
+
+  color: var(--blue-header);
+}
+
+.ifs1-root .sec-path-icon{
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   QUICK CHECK
+========================================================= */
+
+.ifs1-root .sec-quickcheck{
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.ifs1-root .sec-quickcheck-q{
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ifs1-root .sec-quickcheck-success{
+  color: var(--green-dark);
+
+  font-weight: 700;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   DETAIL FOOTER
+========================================================= */
+
+.ifs1-root .sec-detail-footer{
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  border-top:
+    1px solid var(--border);
+
+  padding-top: 14px;
+
+  margin-top: 0;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   OBSERVATION TABLE
+========================================================= */
+
+.ifs1-root .table-section{
+  overflow: hidden;
+}
+
+.ifs1-root .table-scroll{
+  overflow-x: auto;
+
+  margin-top: 8px;
+
+  border-radius: 6px;
+
+  border: 1px solid var(--border);
+}
+
+.ifs1-root .obs-table{
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 13px;
+
+  min-width: 700px;
+}
+
+.ifs1-root .obs-table thead tr{
+  background: var(--blue-row);
+
+  color: #fff;
+}
+
+.ifs1-root .obs-table thead th{
+  padding: 10px 8px;
+
+  text-align: center;
+
+  font-weight: 600;
+
+  font-size: 12px;
+}
+
+.ifs1-root .obs-table tbody tr{
+  border-bottom:
+    1px solid var(--border);
+}
+
+.ifs1-root .obs-table tbody td{
+  padding: 9px 8px;
+
+  text-align: center;
+}
+
+.ifs1-root .row-correct{
+  background: #f0fdf4;
+}
+
+.ifs1-root .row-correct td:last-child{
+  color: var(--green-dark);
+
+  font-weight: 700;
+}
+
+.ifs1-root .sim-status{
+  margin-top: 10px;
+
+  font-size: 13px;
+
+  text-align: center;
+
+  color: var(--text-muted);
+}
+
+
+/* =========================================================
+   QUIZ / ASSIGNMENT
+========================================================= */
+
+.ifs1-root .quiz-card{
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.ifs1-root .quiz-item{
+  border-bottom:
+    1px solid var(--border);
+
+  padding-bottom: 12px;
+}
+
+.ifs1-root .quiz-question{
+  font-size: 13.5px;
+
+  font-weight: 600;
+
+  margin-bottom: 8px;
+}
+
+.ifs1-root .quiz-options{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.ifs1-root .quiz-option{
+  display: flex;
+  min-width: 0;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 6px;
+
+  font-size: 12.5px;
+
+  cursor: pointer;
+
+  background: #f9fafb;
+}
+
+.ifs1-root .quiz-option:hover{
+  border-color:
+    var(--blue-header);
+}
+
+.ifs1-root .quiz-option.selected{
+  border-color:
+    var(--blue-header);
+
+  background: #eef1fb;
+}
+
+.ifs1-root .quiz-option.correct{
+  border-color: var(--green);
+
+  background: #ecfdf5;
+
+  color: var(--green);
+
+  font-weight: 700;
+}
+
+.ifs1-root .quiz-option.wrong{
+  border-color: var(--red);
+
+  background: #fdecec;
+
+  color: var(--red);
+
+  font-weight: 700;
+}
+
+.ifs1-root .option-letter{
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: var(--blue-header);
+
+  color: #fff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+.ifs1-root .quiz-result{
+  text-align: center;
+
+  background: #f4f6fb;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  padding: 16px;
+}
+
+.ifs1-root .quiz-result h4{
+  font-size: 18px;
+
+  color: var(--blue-header);
+
+  margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   ASSIGNMENT HINT
+========================================================= */
+
+.ifs1-root .assignment-hint{
+  margin-top: 2px;
+
+  padding: 12px 14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 8px;
+
+  background: #f4f6fb;
+
+  color: var(--text-muted);
+
+  text-align: center;
+
+  font-size: 12.5px;
+}
+
+.ifs1-root .assignment-hint b{
+  color: var(--blue-header);
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.ifs1-root .submit-section{
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 18px;
+
+  background: var(--card-bg);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 10px;
+
+  box-shadow: var(--shadow);
+}
+
+.ifs1-root .btn-submit{
+  padding: 14px 48px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  color: #fff;
+}
+
+.ifs1-root .btn-submit.enabled{
+  background: var(--green);
+}
+
+.ifs1-root .btn-submit.disabled{
+  background: #9ca3af;
+
+  cursor: not-allowed;
+}
+
+.ifs1-root .submit-status{
+  font-size: 13px;
+
+  color: var(--text-muted);
+
+  line-height: 1.7;
+
+  text-align: center;
+}
+
+.ifs1-root .submit-status b{
+  color: var(--blue-header);
+}
+
+.ifs1-root .submit-success{
+  color: var(--green-dark);
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   POPUPS
+========================================================= */
+
+.ifs1-root .popup-overlay{
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.4);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 200;
+}
+
+.ifs1-root .popup-box{
+  background: #fff;
+
+  border-radius: 10px;
+
+  padding: 20px 22px;
+
+  max-width: 340px;
+
+  width: 90%;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4);
+
+  text-align: center;
+}
+
+.ifs1-root .popup-box p{
+  margin-bottom: 10px;
+
+  font-size: 13px;
+
+  text-align: left;
+}
+
+.ifs1-root .help-popup{
+  text-align: left;
+}
+
+.ifs1-root .hc-help-popup{
+  max-width: 460px;
+
+  max-height: 80vh;
+
+  overflow-y: auto;
+}
+
+.ifs1-root .hc-help-subhead{
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: var(--blue-header);
+
+  margin: 10px 0 4px;
+}
+
+.ifs1-root .hc-help-list{
+  padding-left: 18px;
+
+  font-size: 12.5px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-bottom: 6px;
+}
+
+
+
+
+/* =========================================================
+   LOCKED TABS + SUBMIT LOCK
+========================================================= */
+
+.ifs1-root .caesar-step-tab.locked {
+  color: var(--text-muted);
+  background: #f3f4f6;
+  cursor: pointer;
+  border-color: var(--border);
+}
+
+.ifs1-root .caesar-step-tab.locked:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.ifs1-root .submit-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ifs1-root .submit-lock {
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ifs1-root .submit-lock.locked {
+  background: #f3f4f6;
+  color: var(--text-muted);
+}
+
+.ifs1-root .submit-lock.unlocked {
+  border-color: var(--green);
+  background: #ecfdf5;
+}
+
+.ifs1-root .submit-lock:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.ifs1-root .lock-popup {
+  text-align: center;
+}
+
+.ifs1-root .lock-popup-icon {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.ifs1-root .lock-popup p {
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .ifs1-root .sec-grid{
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+
+  .ifs1-root .sec-overview-layout{
+    grid-template-columns: 40% 60%;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .ifs1-root{
+    padding: 12px;
+  }
+
+  .ifs1-root .proc-grid{
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .ifs1-root .exp-title{
+    font-size: 14px;
+  }
+
+  .ifs1-root .submit-section{
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .ifs1-root .sec-grid{
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  /* Overview still divided */
+  .ifs1-root .sec-overview-layout{
+    grid-template-columns: 38% 62%;
+
+    gap: 12px;
+  }
+
+  .ifs1-root .sec-overview-layout
+  .sec-detail-icon-row{
+    min-height: 170px;
+  }
+
+  .ifs1-root .sec-overview-content{
+    padding:
+      8px 12px 8px 2px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .ifs1-root .sec-grid{
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  /* Stack only on mobile */
+  .ifs1-root .sec-overview-layout{
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .ifs1-root .sec-overview-layout
+  .sec-detail-icon-row{
+    min-height: 140px;
+
+    height: 140px;
+
+    font-size: 50px;
+  }
+
+  .ifs1-root .sec-overview-content{
+    padding: 4px 2px;
+  }
+
+  .ifs1-root .sec-card{
+    height: 145px;
+
+    min-height: 145px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+  .ifs1-root .exp-header{
+    gap: 6px;
+  }
+
+  .ifs1-root .btn-back,
+  .ifs1-root .btn-help{
+    padding: 7px 10px;
+
+    font-size: 11px;
+  }
+
+  .ifs1-root .exp-title{
+    font-size: 12px;
+  }
+
+  .ifs1-root .canvas-btn{
+    padding: 9px 14px;
+
+    font-size: 12px;
+  }
+
+  .ifs1-root .sec-grid{
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .ifs1-root .sec-card{
+    height: 140px;
+
+    min-height: 140px;
+
+    padding: 10px 6px;
+  }
+
+  .ifs1-root .sec-card-icon{
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 28px;
+  }
+
+  .ifs1-root .sec-card-label{
+    font-size: 12px;
+  }
+
+  .ifs1-root .sec-card-tagline{
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   READ ALL SECTIONS / MARK AS EXPLORED BUTTON
+   Compact override for JSX: className="btn-verify"
+========================================================= */
+.ifs1-root button.btn-verify{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: max-content !important;
+  height: 34px !important;
+  padding: 6px 12px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  background: var(--green) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+
+.ifs1-root button.btn-verify:hover:not(:disabled){
+  opacity: 0.9 !important;
+  transform: translateY(-1px) !important;
+}
+
+.ifs1-root button.btn-verify:disabled{
+  background: #9ca3af !important;
+  color: #fff !important;
+  opacity: 0.8 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+@media (max-width: 600px) {
+  .ifs1-root button.btn-verify{
+    height: 32px !important;
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+  }
+}
