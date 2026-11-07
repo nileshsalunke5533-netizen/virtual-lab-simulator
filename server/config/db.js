@@ -7,6 +7,11 @@ const pool = mysql.createPool({
   user: config.dbUser,
   password: config.dbPassword,
   database: config.dbName,
+
+  ssl: {
+    minVersion: "TLSv1.2",
+  },
+
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
